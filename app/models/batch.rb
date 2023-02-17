@@ -1,4 +1,8 @@
 class Batch < ApplicationRecord
 	validates_presence_of :serialnumber, :description
-	has_many :qr_codes
+	has_many :qrcodes, dependent: :destroy
+
+	def generateQR
+	end
+
 end

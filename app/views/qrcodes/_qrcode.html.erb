@@ -1,0 +1,13 @@
+<div id="<%= dom_id qrcode %>">
+  <p>Created <%= time_tag qrcode.created_at, "data-local": "time-ago" %>
+  <p>
+    <strong>Code:</strong>
+    <%= qrcode.code %>
+  </p>
+
+  <p>
+    <strong>Url:</strong>
+    <%= qrcode.url %>
+  </p>
+
+</div>

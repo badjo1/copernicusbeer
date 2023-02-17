@@ -57,6 +57,28 @@ class BatchesController < ApplicationController
     end
   end
 
+  # DELETE /batches/1 or /batches/1.json
+  def generate
+    @batch = Batch.find(params[:id])
+
+
+    24.times { |i| 
+      new_qr = @batch.qrcodes.build(code: i.to_s, url: '123')
+      new_qr.generate_token
+      new_qr.save
+    }
+
+    respond_to do |format|
+      if true
+        format.html { redirect_to batch_url(@batch), notice: "QR codes were successfully created." }
+        format.json { render :show, status: :created, location: @batch }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @batch.errors, status: :unprocessable_entity }
+      end
+    end  
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_batch
