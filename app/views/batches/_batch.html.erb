@@ -1,0 +1,17 @@
+<div id="<%= dom_id batch %>">
+  <p>
+    <strong>Serialnumber:</strong>
+    <%= batch.serialnumber %>
+  </p>
+  <p>Created <%= time_tag batch.created_at, "data-local": "time-ago" %>
+  <p>
+    <strong>Description:</strong>
+    <%= batch.description %>
+  </p>
+
+  <p>
+    <strong>Liters:</strong>
+    <%= batch.liters %>
+  </p>
+
+</div>
