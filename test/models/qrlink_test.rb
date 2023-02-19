@@ -1,6 +1,6 @@
 require "test_helper"
 
-class QrcodesControllerTest < ActionDispatch::IntegrationTest
+class QrlinkTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

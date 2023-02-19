@@ -1,0 +1,38 @@
+<p style="color: green"><%= notice %></p>
+
+<header>
+  <h1>Qrcodes</h1>
+  <p>The 24 famous QR codes on the label of Coperniucsbeer</p>
+
+  <%= link_to "New qrcode", new_qrcode_path %>
+
+</header>
+
+<main id="qrcodes">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Url</th>
+        <th>#</th>
+        <th></th>
+        <th></th>  
+      </tr>
+    </thead>
+    <tbody>
+    <% @qrcodes.each do |qrcode| %>
+      <tr>
+        <td><%= link_to qrcode.code, qrcode %></td>
+        <td><%= qrcode.baseurl %></td>
+        <td><%= qrcode.referencenumber %> (<%= qrcode.to_char_code %>) </td>
+        <td><%= button_to "Edit", edit_qrcode_path(qrcode), method: :get %></td>
+        <td> <%= button_to "Destroy", qrcode, method: :delete %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+</main>
+
+  

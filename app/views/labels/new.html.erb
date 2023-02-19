@@ -1,0 +1,9 @@
+<h1>New label of batch <%= @batch.serialnumber %></h1>
+
+<%= render "form", label: [@batch, @label] %>
+
+<br>
+
+<div>
+  <%= link_to "Back to batch #{@batch.serialnumber}", @batch %>
+</div>

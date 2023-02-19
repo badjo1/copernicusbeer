@@ -1,7 +1,0 @@
-<H2>QR Codes</H2>
-<div id="qrcodes">
-	<%# expands to render partial qrcodes/qrcode %>
-	<% batch.qrcodes.each do |qr| %>
-    	<%= render "qrcodes/qrcode", qrcode: qr %>
-	<% end %>
-</div>

@@ -1,13 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @batch %>
-<%= render "batches/qrcodes", batch: @batch %>
-
-<div>
+<header>
+  <h1>Batch <%= @batch.serialnumber %></h1>
+  <p><%= @batch.description %></p>
   <%= link_to "Edit this batch", edit_batch_path(@batch) %> |
-  <%= link_to "Back to batches", batches_path %>
-
   <%= button_to "Destroy this batch", @batch, method: :delete %>
-  <%= button_to "Generate QR Codes", generate_batch_path(@batch), method: :get %>
+</header>
 
-</div>
+<main>
+<%= render "batches/labels", batch: @batch %>
+
+<%= link_to "Back to batches", batches_path %>
+<main>

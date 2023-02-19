@@ -1,14 +1,30 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Batches</h1>
+<header>
+  <h1>Batches</h1>
+  <p>Yummie all that Coperniucsbeer</p>
+  <%= link_to "New batch", new_batch_path %>
+</header>
 
-<div id="batches">
-  <% @batches.each do |batch| %>
-    <%= render batch %>
-    <p>
-      <%= link_to "Show this batch", batch %>
-    </p>
-  <% end %>
-</div>
 
-<%= link_to "New batch", new_batch_path %>
+<main id="batches">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @batches.each do |batch| %>
+      <tr>
+        <td><%= link_to batch.serialnumber, batch %></td>
+        <td><%= batch.description %></td>
+        <td><%= "#{batch.liters} liters" %></td>  
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</main>
+

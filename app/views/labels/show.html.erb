@@ -1,0 +1,27 @@
+<p style="color: green"><%= notice %></p>
+
+<header>
+  <h1>Label <%= @label.code %> of batch <%= @label.batch.serialnumber %></h1>
+  <p><%= @label.description %></p>
+  <%= link_to "Edit this label", edit_label_path(@label) %> |
+  <%= button_to "Destroy this label", @label, method: :delete %>
+</header>
+
+
+<main>
+  <section>
+  <H2><%= @label.qrtags.load.count %> Tags</H2>
+  <ul id="tags">
+    <%= link_to "download (CSV)", label_qrtags_path(@label, format: :csv) %> 
+    <% @label.qrtags.each do |qrtag| %>
+        <li><%= qrtag.code  %></li>
+    <% end %>
+  </ul>
+</section>
+
+  <section>
+    <%= link_to "Back to batch #{@label.batch.serialnumber}", @label.batch %>
+ </section>
+<main>
+
+

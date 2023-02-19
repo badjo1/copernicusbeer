@@ -1,0 +1,11 @@
+<section>
+	<H2>Labels</H2>
+	<ul id="labels">
+		<%# expands to render partial qrcodes/qrcode %>
+		<% batch.labels.each do |label| %>
+	    	<li><%= link_to "#{label.code}", label %></li>
+		<% end %>
+	</ul>
+	 <%= link_to "New label", new_batch_label_path(@batch) %>
+    
+</section>

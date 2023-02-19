@@ -4,7 +4,7 @@
     <%= batch.serialnumber %>
   </p>
   <p>Created <%= time_tag batch.created_at, "data-local": "time-ago" %><p>
-  <p>Counted <%= batch.qrcodes.count  %><p>
+  <p>Labels <%= batch.labels.count  %><p>
   <p>
     <strong>Description:</strong>
     <%= batch.description %>

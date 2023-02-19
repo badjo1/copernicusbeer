@@ -1,11 +1,17 @@
 class Qrcode < ApplicationRecord
-  belongs_to :batch
+	validates :referencenumber	, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 24,  only_integer: true }
 
-  def generate_token
-    ticket_code = loop do
-      random_token = SecureRandom.urlsafe_base64(nil, false)
-      break random_token unless Qrcode.exists?(code: random_token)
-    end
-  end
+	def code
+		"#QR#{referencenumber.to_s.rjust(2, '0')}"
+	end
+
+	def to_char_code
+      referencenumber.to_i.to_s(25)
+   	end
+
+	def to_int_code (c)
+      c.to_i(25)
+   	end
+
 
 end

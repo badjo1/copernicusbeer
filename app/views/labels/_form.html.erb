@@ -1,0 +1,22 @@
+<%= form_with(model: label) do |form| %>
+  <%= render 'shared/error_messages', object: form.object %>
+
+  <div>
+    <%= form.label :code, style: "display: block" %>
+    <%= form.text_field :code %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.label :number_of_labels, style: "display: block" %>
+    <%= form.number_field :number_of_labels %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

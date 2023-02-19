@@ -63,10 +63,11 @@ class BatchesController < ApplicationController
 
 
     24.times { |i| 
-      new_qr = @batch.qrcodes.build(code: i.to_s, url: '123')
+      new_qr = @batch.qrcode.build(code: i.to_s, url: '123')
       new_qr.generate_token
       new_qr.save
     }
+  
 
     respond_to do |format|
       if true
