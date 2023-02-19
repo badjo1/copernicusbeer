@@ -1,5 +1,5 @@
 class QrcodesController < ApplicationController
-  before_action :set_qrcode, only: %i[ show edit update destroy ]
+  before_action :set_qrcode, only: %i[ edit update destroy ]
 
   # GET /qrcodes or /qrcodes.json
   def index
@@ -8,6 +8,8 @@ class QrcodesController < ApplicationController
 
   # GET /qrcodes/1 or /qrcodes/1.json
   def show
+      # @qrcode = Qrcode.find_by(referencenumber: params[:id])
+      @qrcode = Qrcode.find_by referencenumber: params[:id]
   end
 
   # GET /qrcodes/new

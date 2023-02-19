@@ -41,7 +41,7 @@ class LabelsController < ApplicationController
     qrcodes = Qrcode.all.order(:referencenumber)
     n.times { |i| 
       qrcodes.each do |qrcode|    
-        new_tag = @label.qrtags.new(qrcode: qrcode)
+        new_tag = @label.qrtags.new(qrcode: qrcode, labelnumber: i)
         new_tag.generate_token  
         new_tag.save!
       end  

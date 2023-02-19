@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_18_154139) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_19_213214) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_18_154139) do
     t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "labelnumber", null: false
     t.index ["label_id", "code"], name: "index_qrtags_on_label_id_and_code", unique: true
     t.index ["label_id"], name: "index_qrtags_on_label_id"
     t.index ["qrcode_id"], name: "index_qrtags_on_qrcode_id"

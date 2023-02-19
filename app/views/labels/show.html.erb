@@ -11,12 +11,7 @@
 <main>
   <section>
   <H2><%= @label.qrtags.load.count %> Tags</H2>
-  <ul id="tags">
-    <%= link_to "download (CSV)", label_qrtags_path(@label, format: :csv) %> 
-    <% @label.qrtags.each do |qrtag| %>
-        <li><%= qrtag.code  %></li>
-    <% end %>
-  </ul>
+  <p><%= link_to "download (CSV)", label_qrtags_path(@label, format: :csv) %> </p>
 </section>
 
   <section>

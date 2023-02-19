@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   # get '/:qr/:id)', to: 'qrtags#show', constraints: { qr: /[q]\d{2}/ }
 
   # Defines the root path route ("/")
-  root "batches#index"
+  root "qrcodes#show", defaults: { id: 10 }
 
   
 end
