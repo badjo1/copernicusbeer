@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_18_154139) do
     t.string "code", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["label_id", "code"], name: "index_qrtags_on_label_id_and_code", unique: true
     t.index ["label_id"], name: "index_qrtags_on_label_id"
     t.index ["qrcode_id"], name: "index_qrtags_on_qrcode_id"
     t.index ["qrlink_id"], name: "index_qrtags_on_qrlink_id"

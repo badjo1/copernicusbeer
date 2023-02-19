@@ -7,6 +7,7 @@ class CreateQrtags < ActiveRecord::Migration[7.0]
       t.datetime :claimed_on 
       t.string :code, null: false
       t.timestamps
+      t.index [:label_id,:code ], unique: true
     end
   end
 end
