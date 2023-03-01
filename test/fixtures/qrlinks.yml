@@ -1,7 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  label: one
+  qrcode: one
   url: MyString
 
 two:
+  label: two
+  qrcode: two
   url: MyString

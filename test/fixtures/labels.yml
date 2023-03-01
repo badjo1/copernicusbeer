@@ -1,7 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  code: MyString
+  code: A1
+  batch: one
+  description: MyString
+  number_of_labels: 10
 
 two:
-  code: MyString
+  code: A2
+  batch: two
+  description: MyString
+  number_of_labels: 10

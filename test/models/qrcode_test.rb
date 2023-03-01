@@ -1,6 +1,6 @@
 require "test_helper"
 
-class LabelcodeTest < ActiveSupport::TestCase
+class QrcodeTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

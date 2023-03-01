@@ -6,6 +6,6 @@ one:
   liters: 1
 
 two:
-  serialnumber: 1
+  serialnumber: 2
   description: MyString
   liters: 1

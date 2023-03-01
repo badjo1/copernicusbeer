@@ -16,7 +16,7 @@ class QrtagsController < ApplicationController
     @qrtags = @label.qrtags.includes(:qrcode)
     csv_name = "qrtags-#{@label.batch.serialnumber}-#{@label.code}-#{Date.today}.csv"   
     respond_to do |format|
-      format.html
+      # format.html
       format.csv { send_data @qrtags.to_csv, filename: csv_name }
     end 
   end

@@ -3,21 +3,21 @@ require "test_helper"
 class LabelsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @label = labels(:one)
+    @batch = @label.batch
   end
 
   test "should get index" do
-    get labels_url
-    assert_response :success
+    # no index
   end
 
   test "should get new" do
-    get new_label_url
+    get new_batch_label_url @batch
     assert_response :success
   end
 
   test "should create label" do
     assert_difference("Label.count") do
-      post labels_url, params: { label: { code: @label.code } }
+      post batch_labels_url(@batch), params: { label: { code: "unq", description: @label.description, number_of_labels: @label.number_of_labels} }
     end
 
     assert_redirected_to label_url(Label.last)
@@ -43,6 +43,7 @@ class LabelsControllerTest < ActionDispatch::IntegrationTest
       delete label_url(@label)
     end
 
-    assert_redirected_to labels_url
+    assert_redirected_to batch_url (@batch)
   end
+
 end

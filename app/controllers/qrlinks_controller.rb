@@ -65,6 +65,6 @@ class QrlinksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def qrlink_params
-      params.require(:qrlink).permit(:url)
+      params.require(:qrlink).permit(:url, :label_id, :qrcode_id)
     end
 end

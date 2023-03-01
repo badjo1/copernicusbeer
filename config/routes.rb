@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     resources :qrtags, only: [:index]
   end
 
-  get '/:qr/:label/:tag', to: 'qrtags#show', constraints: { qr: /[q][0-9a-z]/ }
+  get '/:qr/:label/:tag', to: 'qrtags#show', constraints: { qr: /[q][0-9a-z]/ }, as: 'qrtag'
 
   # get '/:qr/:id)', to: 'qrtags#show', constraints: { qr: /[q]\d{2}/ }
 

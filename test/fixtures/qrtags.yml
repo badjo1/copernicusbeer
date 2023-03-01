@@ -1,7 +1,18 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  qrcode: one
+  label: one
+  qrlink: one
   code: MyString
+  claimed_on: <%= DateTime.now %>
+  labelnumber: 1
 
 two:
+  qrcode: two
+  label: two
+  qrlink: two
   code: MyString
+  claimed_on: <%= DateTime.now %>
+  code: MyString
+  labelnumber: 1
