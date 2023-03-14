@@ -13,7 +13,7 @@ class QrtagsController < ApplicationController
   # GET /labels/:id/qrtags 
   def index
     @label = Label.find params[:label_id]
-    @qrtags = @label.qrtags.includes(:qrcode)
+    @qrtags = @label.qrtags.joins(:qrcode).includes(:qrcode).order(:labelnumber, :referencenumber)
     csv_name = "qrtags-#{@label.batch.serialnumber}-#{@label.code}-#{Date.today}.csv"   
     respond_to do |format|
       # format.html
