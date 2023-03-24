@@ -2,11 +2,11 @@ class QrtagsController < ApplicationController
 
   # GET /labels/:id/qrtags 
   def show
-    @label = Label.find_by code: params[:label]
-    @qrtag =  @label.qrtags.find_by code: params[:tag]
+    label = Label.find_by code: params[:label]
+    qrtag =  label.qrtags.find_by code: params[:tag]
    
     respond_to do |format|
-      format.html
+      format.html { redirect_to qrtag.qrcode.baseurl, allow_other_host: true }
     end 
   end
 
