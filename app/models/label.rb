@@ -13,12 +13,13 @@ class Label < ApplicationRecord
 
 	def current_qrlinks
 		self.qrlinks.joins(:qrcode).includes(:qrcode).order(:referencenumber).where("
-	        qrlinks.created_at = (SELECT MAX(created_at)
+	          qrlinks.created_at = (SELECT MAX(created_at)
 	          FROM qrlinks ql
-	          WHERE ql.label_id = label_id
+	          WHERE ql.id = qrlinks.id
 	          GROUP BY qrcode_id
 	          HAVING ql.qrcode_id = qrlinks.qrcode_id 
-	        )
+	          )
+
 	      ")
 	end
 
