@@ -1,12 +1,52 @@
 class QrtagsController < ApplicationController
 
-  # GET /labels/:id/qrtags 
-  def show
-    label = Label.find_by code: params[:label]
-    qrtag =  label.qrtags.find_by code: params[:tag]
-   
+  # GET /labels/:label_id/search(/:q)
+  def search
+    @label = Label.find params[:label_id]
+    if params[:q] 
+      # @result = @label.qrtags.joins(:qrcode).includes(:qrcode).order(:labelnumber, :referencenumber).where(code: params[:q]) 
+      @qrtag = @label.search.find_by(code: params[:q]) 
+    else
+      params[:q] = @label.qrtags.first.code
+    end
+
+    if @qrtag 
+      @qrtags = @label.search.where(labelnumber: @qrtag.labelnumber)
+    end
+
     respond_to do |format|
-      format.html { redirect_to qrtag.qrcode.baseurl, allow_other_host: true }
+      format.html
+    end 
+  end
+
+  def claim
+    @label = Label.find params[:label_id]
+    @qrtag = @label.search.find_by(code: params[:tag]) 
+    if @qrtag 
+      claim_label(@qrtag.labelnumber)
+      redirect_to @label, notice: "Qrlink was successfully created."
+    else
+      redirect_to @label, notice: "No valid tag."
+    end
+  end
+
+  #  GET '/:qr/:label/:tag'
+  def redirect
+
+    @label = Label.find_by code: params[:label]
+    qrtag =  @label.qrtags.find_by code: params[:tag]
+
+    #todo extra test if tagcode is not exists
+
+    if !(qrtag.qrlink)
+      claim_label(qrtag.labelnumber)
+      qrtag.reload
+    end
+
+   to_url = qrtag.to_url
+
+    respond_to do |format|
+      format.html { redirect_to to_url, allow_other_host: true }
     end 
   end
 
@@ -20,5 +60,20 @@ class QrtagsController < ApplicationController
       format.csv { send_data @qrtags.to_csv, filename: csv_name }
     end 
   end
+
+  private
+
+    def qrtags_params
+      params.require(:qrtag).permit(:q)
+    end
+
+    def claim_label (labelnumber)
+      tags_on_label = @label.qrtags.where(labelnumber: labelnumber)
+      latest_links = @label.current_qrlinks
+      tags_on_label.each do |tag|   
+        link=latest_links.find_by(qrcode_id: tag.qrcode_id)
+        tag.update(qrlink_id: link.id) if link
+      end     
+    end
 
 end

@@ -1,9 +1,9 @@
-<h1>New qrlink</h1>
+<h1>New link of <%= @label.code %></h1>
 
-<%= render "form", qrlink: @qrlink %>
+<%= render "form", qrlink: [@label,@qrlink] %>
 
 <br>
 
 <div>
-  <%= link_to "Back to qrlinks", qrlinks_path %>
+  <%= link_to "Back to label '#{@label.code}'", @label %>
 </div>

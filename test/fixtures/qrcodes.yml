@@ -2,8 +2,8 @@
 
 one:
   referencenumber: 1
-  baseurl: MyString
+  baseurl: https://qrcodes.to/
 
 two:
   referencenumber: 2
-  baseurl: MyString
+  baseurl: https://qrcodes.to/

@@ -3,9 +3,9 @@
 one:
   label: one
   qrcode: one
-  url: MyString
+  url: https://qrlinks.to/
 
 two:
   label: two
   qrcode: two
-  url: MyString
+  url: https://qrlinks.to/

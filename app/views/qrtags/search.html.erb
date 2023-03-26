@@ -1,0 +1,22 @@
+<header>
+   <h1>Search tag in batch <%= @label.batch.serialnumber %> label <%= @label.code %></h1>
+    <%= form_tag label_search_path(@label), method: :get do %>
+      <div>
+        <%= text_field_tag(:q, params[:q]) %>
+        <%= submit_tag("search", name: nil) %>
+      </div>
+    <% end %>
+</header>
+
+<% if @qrtags %>
+  <div id="result">
+    <% @qrtags.each do |qrtag| %>
+        <%= qrtag.qrcode.code %>: <%= qrtag.code %> (<%= qrtag.to_url %>)
+        <% if qrtag.id == @qrtag.id %>
+          selected
+        <% end %>
+        <br/>
+    <% end %>
+  </div>
+<% end %>
+

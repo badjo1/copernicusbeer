@@ -16,6 +16,10 @@ class Qrtag < ApplicationRecord
   		return "http://cpbr.xyz/q#{qrcode.to_char_code}/#{label.code}/#{code}"
   	end
 
+  	def to_url
+  		qrlink ? qrlink.url : qrcode.baseurl
+  	end
+
 	def self.to_csv
 	attributes = %w{tagurl}
 	generate_csv(attributes)

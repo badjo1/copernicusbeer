@@ -3,6 +3,7 @@ require "test_helper"
 class QrlinksControllerTest < ActionDispatch::IntegrationTest
   setup do
     @qrlink = qrlinks(:one)
+    @label  = @qrlink.label
   end
 
   test "should get index" do
@@ -11,16 +12,16 @@ class QrlinksControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    get new_qrlink_url
+    get new_label_qrlink_url @label
     assert_response :success
   end
 
   test "should create qrlink" do
     assert_difference("Qrlink.count") do
-      post qrlinks_url, params: { qrlink: { label_id: @qrlink.label_id, qrcode_id: @qrlink.qrcode_id, url: @qrlink.url } }
+      post label_qrlinks_url(@label), params: { qrlink: { label_id: @qrlink.label_id, qrcode_id: @qrlink.qrcode_id, url: @qrlink.url } }
     end
 
-    assert_redirected_to qrlink_url(Qrlink.last)
+    assert_redirected_to label_url(@label)
   end
 
 

@@ -1,19 +1,15 @@
 <%= form_with(model: qrlink) do |form| %>
-  <% if qrlink.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(qrlink.errors.count, "error") %> prohibited this qrlink from being saved:</h2>
+  <%= render 'shared/error_messages', object: form.object %>
 
-      <ul>
-        <% qrlink.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <div>
     <%= form.label :url, style: "display: block" %>
     <%= form.text_field :url %>
+  </div>
+
+  <div>
+
+    <%= form.select(:qrcode_id, Qrcode.all.collect{ |m| [m.code, m.id] }, :prompt => 'Select') %>
   </div>
 
   <div>

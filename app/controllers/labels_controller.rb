@@ -8,6 +8,7 @@ class LabelsController < ApplicationController
 
   # GET /labels/1 or /labels/1.json
   def show
+    @qrlinks = @label.current_qrlinks
   end
 
   # GET /labels/new

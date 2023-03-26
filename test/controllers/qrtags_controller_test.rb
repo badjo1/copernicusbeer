@@ -11,8 +11,34 @@ class QrtagsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show qrtag" do
-    get qrtag_url qr: 'q1', label: @qrtag.label.code, tag: @qrtag.code
-    assert_response :success
+    get redirect_url qr: 'q1', label: @qrtag.label.code, tag: @qrtag.code
+    assert_redirected_to @qrtag.qrlink.url
   end
+
+  test "should claim label and redirect to qrlink" do
+    url_to = "https://redirect.to/"
+    @qrtag.qrlink.update!(url: url_to)   
+    @qrtag.update!(qrlink_id: nil)
+    get redirect_url qr: 'q1', label: @qrtag.label.code, tag: @qrtag.code
+    assert_redirected_to url_to 
+  end
+
+  test "should claim latest label and redirect to qrlink" do
+    url_to = "https://latest.to/"
+    qrlink = Qrlink.create!(label_id: @qrtag.label_id, qrcode_id: @qrtag.qrcode_id, url: url_to)
+    @qrtag.update!(qrlink_id: nil)
+    get redirect_url qr: 'q1', label: @qrtag.label.code, tag: @qrtag.code
+    assert_redirected_to url_to 
+  end
+
+
+  test "should claim default label and redirect to qrlink" do
+    qrlink = @qrtag.qrlink
+    @qrtag.update!(qrlink_id: nil)   
+    qrlink.destroy
+    get redirect_url qr: 'q1', label: @qrtag.label.code, tag: @qrtag.code
+    assert_redirected_to @qrtag.qrcode.baseurl 
+  end
+
 
 end
