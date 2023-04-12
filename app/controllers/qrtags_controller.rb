@@ -31,7 +31,6 @@ class QrtagsController < ApplicationController
 
   #  GET '/:qr/:label/:tag'
   def redirect
-    debugger
     @label = Label.find_by code: params[:label]
     qrtag =  @label.qrtags.find_by code: params[:tag]
 
@@ -67,7 +66,6 @@ class QrtagsController < ApplicationController
     end
 
     def claim_label (labelnumber)
-      debugger
       tags_on_label = @label.qrtags.where(labelnumber: labelnumber)
       latest_links =  Qrlink.latest_qrlinks.where(label_id: @label.id)   
       tags_on_label.each do |tag|   
