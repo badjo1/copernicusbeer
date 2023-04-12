@@ -25,6 +25,7 @@
         <% @qrlinks.each do |qrlink| %>
             <li>
               <%= link_to "#{qrlink.qrcode.code}: ", qrlink %>
+              <%= qrlink.url %>
               <%= qrlink.created_at %>
               <%= button_to "Destroy this qrlink", qrlink, method: :delete %>
 

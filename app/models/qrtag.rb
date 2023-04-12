@@ -2,6 +2,8 @@ class Qrtag < ApplicationRecord
 	belongs_to :label
 	belongs_to :qrcode
 	belongs_to :qrlink, optional: true
+	
+	scope :with_qrcode, -> { joins(:qrcode).includes(:qrcode).order(:labelnumber, :referencenumber) }
 
 	
 	def generate_token

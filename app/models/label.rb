@@ -1,26 +1,14 @@
 class Label < ApplicationRecord
 	belongs_to :batch
 	has_many :qrtags, dependent: :destroy
-	has_many :qrlinks
+	has_many :qrlinks, dependent: :destroy
 
 	validates :code        		, presence: true
 	validates :code        		, length: {minimum: 1, maximum: 3}, allow_blank: true
 	validates :number_of_labels	, numericality: { greater_than_or_equal_to: 1,  only_integer: true }
 
-	def search
-		self.qrtags.joins(:qrcode).includes(:qrcode).order(:labelnumber, :referencenumber)
-	end
-
-	def current_qrlinks
-		self.qrlinks.joins(:qrcode).includes(:qrcode).order(:referencenumber).where("
-	          qrlinks.created_at = (SELECT MAX(created_at)
-	          FROM qrlinks ql
-	          WHERE ql.id = qrlinks.id
-	          GROUP BY qrcode_id
-	          HAVING ql.qrcode_id = qrlinks.qrcode_id 
-	          )
-
-	      ")
+	def find_tag (code)
+		self.qrtags.with_qrcode.find_by(code: code)
 	end
 
 end

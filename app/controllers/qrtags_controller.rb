@@ -4,14 +4,13 @@ class QrtagsController < ApplicationController
   def search
     @label = Label.find params[:label_id]
     if params[:q] 
-      # @result = @label.qrtags.joins(:qrcode).includes(:qrcode).order(:labelnumber, :referencenumber).where(code: params[:q]) 
-      @qrtag = @label.search.find_by(code: params[:q]) 
+      @qrtag = @label.find_tag(params[:q]) 
     else
       params[:q] = @label.qrtags.first.code
     end
 
     if @qrtag 
-      @qrtags = @label.search.where(labelnumber: @qrtag.labelnumber)
+      @qrtags = @label.qrtags.with_qrcode.where(labelnumber: @qrtag.labelnumber)
     end
 
     respond_to do |format|
@@ -21,7 +20,7 @@ class QrtagsController < ApplicationController
 
   def claim
     @label = Label.find params[:label_id]
-    @qrtag = @label.search.find_by(code: params[:tag]) 
+    @qrtag = @label.qrtags.find_by(code: params[:tag]) 
     if @qrtag 
       claim_label(@qrtag.labelnumber)
       redirect_to @label, notice: "Qrlink was successfully created."
@@ -32,7 +31,7 @@ class QrtagsController < ApplicationController
 
   #  GET '/:qr/:label/:tag'
   def redirect
-
+    debugger
     @label = Label.find_by code: params[:label]
     qrtag =  @label.qrtags.find_by code: params[:tag]
 
@@ -68,12 +67,14 @@ class QrtagsController < ApplicationController
     end
 
     def claim_label (labelnumber)
+      debugger
       tags_on_label = @label.qrtags.where(labelnumber: labelnumber)
-      latest_links = @label.current_qrlinks
+      latest_links =  Qrlink.latest_qrlinks.where(label_id: @label.id)   
       tags_on_label.each do |tag|   
         link=latest_links.find_by(qrcode_id: tag.qrcode_id)
         tag.update(qrlink_id: link.id) if link
-      end     
+      end
+
     end
 
 end

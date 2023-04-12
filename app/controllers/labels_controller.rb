@@ -8,7 +8,7 @@ class LabelsController < ApplicationController
 
   # GET /labels/1 or /labels/1.json
   def show
-    @qrlinks = @label.current_qrlinks
+    @qrlinks = Qrlink.latest_qrlinks.with_qrcode.where(label_id: params[:id])
   end
 
   # GET /labels/new
@@ -36,17 +36,6 @@ class LabelsController < ApplicationController
         format.json { render json: @label.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def createTags (n)    
-    qrcodes = Qrcode.all.order(:referencenumber)
-    n.times { |i| 
-      qrcodes.each do |qrcode|    
-        new_tag = @label.qrtags.new(qrcode: qrcode, labelnumber: i)
-        new_tag.generate_token  
-        new_tag.save!
-      end  
-    }   
   end
 
   # PATCH/PUT /labels/1 or /labels/1.json
@@ -82,6 +71,17 @@ class LabelsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def label_params
       params.require(:label).permit(:code,:description, :number_of_labels)
+    end
+
+    def createTags (n)    
+      qrcodes = Qrcode.all.order(:referencenumber)
+      n.times { |i| 
+        qrcodes.each do |qrcode|    
+          new_tag = @label.qrtags.new(qrcode: qrcode, labelnumber: i)
+          new_tag.generate_token  
+          new_tag.save!
+        end  
+      }   
     end
 
 end
