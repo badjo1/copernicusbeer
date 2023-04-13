@@ -8,8 +8,7 @@ class QrcodesController < ApplicationController
 
   # GET /qrcodes/1 or /qrcodes/1.json
   def show
-      # @qrcode = Qrcode.find_by(referencenumber: params[:id])
-      @qrcode = Qrcode.find_by referencenumber: params[:id]
+    @qrcode = Qrcode.find params[:id]
   end
 
   # GET /qrcodes/new

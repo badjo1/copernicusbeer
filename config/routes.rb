@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   # get '/:qr/:id)', to: 'qrtags#show', constraints: { qr: /[q]\d{2}/ }
 
   # Defines the root path route ("/")
-  root "qrcodes#show", defaults: { id: 10 }
+  root "qrcodes#show", defaults: { id: 9 }
 
   
 end

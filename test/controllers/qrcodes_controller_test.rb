@@ -24,7 +24,7 @@ class QrcodesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show qrcode" do
-    get qrcode_url(@qrcode.referencenumber)
+    get qrcode_url(@qrcode)
     assert_response :success
   end
 
