@@ -9,7 +9,7 @@ class Qrcode < ApplicationRecord
       referencenumber.to_i.to_s(25)
    	end
 
-	def to_int_code (c)
+	def self.to_reference (c)
       c.to_i(25)
    	end
 

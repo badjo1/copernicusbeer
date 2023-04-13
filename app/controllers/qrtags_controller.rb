@@ -31,21 +31,22 @@ class QrtagsController < ApplicationController
 
   #  GET '/:qr/:label/:tag'
   def redirect
-    @label = Label.find_by code: params[:label]
-    qrtag =  @label.qrtags.find_by code: params[:tag]
+    reference = Qrcode.to_reference(params[:qr][1]) 
+    qrcode = Qrcode.find_by referencenumber: reference
+    return redirect_to root_url, notice: "unknow qrcode" unless qrcode       
 
-    #todo extra test if tagcode is not exists
+    @label = Label.find_by code: params[:label]
+    return redirect_to qrcode, notice: "unknow label" unless @label       
+
+    qrtag =  @label.qrtags.find_by code: params[:tag]
+    return redirect_to qrcode, notice: "unknow tag" unless qrtag              
 
     if !(qrtag.qrlink)
       claim_label(qrtag.labelnumber)
       qrtag.reload
     end
 
-   to_url = qrtag.to_url
-
-    respond_to do |format|
-      format.html { redirect_to to_url, allow_other_host: true }
-    end 
+    redirect_to qrtag.to_url, allow_other_host: true 
   end
 
   # GET /labels/:id/qrtags 
