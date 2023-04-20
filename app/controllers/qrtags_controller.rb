@@ -72,7 +72,8 @@ class QrtagsController < ApplicationController
       tags_on_label.each do |tag|   
         link=latest_links.find_by(qrcode_id: tag.qrcode_id)
         tag.update(qrlink_id: link.id) if link
-        tag.update(claimed_on: Time.current) if tag.id = @qrtag.id
+        # ERROR: duplicate key value violates unique constraint "qrtags_pkey
+        # tag.update(claimed_on: Time.current) if tag.id = @qrtag.id
       end
 
     end
