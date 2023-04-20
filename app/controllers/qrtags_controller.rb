@@ -38,15 +38,15 @@ class QrtagsController < ApplicationController
     @label = Label.find_by code: params[:label]
     return redirect_to qrcode, notice: "unknow label" unless @label       
 
-    qrtag =  @label.qrtags.find_by code: params[:tag]
-    return redirect_to qrcode, notice: "unknow tag" unless qrtag              
+    @qrtag =  @label.qrtags.find_by code: params[:tag]
+    return redirect_to qrcode, notice: "unknow tag" unless @qrtag              
 
-    if !(qrtag.qrlink)
-      claim_label(qrtag.labelnumber)
-      qrtag.reload
+    if !(@qrtag.qrlink)
+      claim_label(@qrtag.labelnumber)
+      @qrtag.reload
     end
 
-    redirect_to qrtag.to_url, allow_other_host: true 
+    redirect_to @qrtag.to_url, allow_other_host: true 
   end
 
   # GET /labels/:id/qrtags 
@@ -68,10 +68,11 @@ class QrtagsController < ApplicationController
 
     def claim_label (labelnumber)
       tags_on_label = @label.qrtags.where(labelnumber: labelnumber)
-      latest_links =  Qrlink.latest_qrlinks.where(label_id: @label.id)   
+      latest_links =  @label.qrlinks.latest_qrlinks  
       tags_on_label.each do |tag|   
         link=latest_links.find_by(qrcode_id: tag.qrcode_id)
         tag.update(qrlink_id: link.id) if link
+        tag.update(claimed_on: Time.current) if tag.id = @qrtag.id
       end
 
     end
