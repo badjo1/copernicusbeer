@@ -3,7 +3,7 @@ class QrcodesController < ApplicationController
 
   # GET /qrcodes or /qrcodes.json
   def index
-    @qrcodes = Qrcode.all.order(:referencenumber)
+    @qrcodes = Qrcode.all.order_by_reference
   end
 
   # GET /qrcodes/1 or /qrcodes/1.json

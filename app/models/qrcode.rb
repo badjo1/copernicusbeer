@@ -1,5 +1,6 @@
 class Qrcode < ApplicationRecord
 	validates :referencenumber	, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 24,  only_integer: true }
+	scope :order_by_reference, -> { order('qrcodes.referencenumber ASC') }
 
 	def code
 		"#QR#{referencenumber.to_s.rjust(2, '0')}"

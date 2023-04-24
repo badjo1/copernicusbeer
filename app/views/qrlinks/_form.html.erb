@@ -9,7 +9,7 @@
 
   <div>
 
-    <%= form.select(:qrcode_id, Qrcode.all.collect{ |m| [m.code, m.id] }, :prompt => 'Select') %>
+    <%= form.select(:qrcode_id, Qrcode.all.order_by_reference.collect{ |m| [m.code, m.id] }, :prompt => 'Select') %>
   </div>
 
   <div>
