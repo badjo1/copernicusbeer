@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get 'claim',  to: 'qrtags#claim', as: :claim
     resources :qrlinks, only: [:new, :create]
     get 'default_qrlinks', to: 'qrlinks#default', as: :default_qrlinks
+    get 'reset_qrlinks', to: 'qrlinks#reset', as: :reset_qrlinks
   end
   resources :qrlinks, only: [:edit, :update, :destroy]
   

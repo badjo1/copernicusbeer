@@ -19,8 +19,8 @@
     <H2>Links</H2>
     <% if @qrlinks.empty? %>
       <%= link_to "Default links", label_default_qrlinks_path(@label) %>
-
     <% else %>
+      <%= link_to "Reset links", label_reset_qrlinks_path(@label) %>
       <ul id="links">
         <% @qrlinks.each do |qrlink| %>
             <li>

@@ -17,11 +17,36 @@ class QrlinksController < ApplicationController
       @label.qrlinks.create(qrcode_id: qrcode.id, url: qrcode.baseurl)
     end 
     respond_to do |format|
-      format.html { redirect_to @label, notice: "Qrlink was successfully created." }
+      format.html { redirect_to @label, notice: "Default Qrlinks were successfully created." }
       format.json { render :show, status: :created, location: @label }
     end
-
   end
+
+  # GET /label/:label_id/reset_qrlinks
+  def reset
+    @label = Label.find(params[:label_id])
+    qrlinks = @label.qrlinks.where(valid_until: nil).order(qrcode_id: :asc,created_at: :asc)
+
+    # Group by qrcode
+    qrcodes = qrlinks.group_by{ |link| link.qrcode_id }
+    min_created_ats = {}
+    qrcodes.each do |qrcode_id, links|
+      min_created_at = links.map(&:created_at).min
+      min_created_ats[qrcode_id] = min_created_at
+    end
+
+    qrlinks.each do |qrlink|
+      unless min_created_ats[qrlink.qrcode_id]==qrlink.created_at
+        qrlink.update(valid_until: Time.now)
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to @label, notice: "Qrlink was successfully reset." }
+      format.json { render :show, status: :created, location: @label }
+    end
+  end
+
 
   # GET /qrlinks/new
   def new
