@@ -48,6 +48,9 @@ gem "sassc-rails"
 
 gem 'bootstrap'
 
+# https://github.com/perfectline/validates_url
+gem "validate_url"
+
 # analytics: Track visits and events https://github.com/ankane/ahoy
 #gem "ahoy_matey"
 
