@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   # get '/:qr/:id)', to: 'qrtags#show', constraints: { qr: /[q]\d{2}/ }
 
+
+  get 'add_to_metamask', to: 'sites#add_to_metamask'
   # Defines the root path route ("/")
   root "sites#claimed"
 
