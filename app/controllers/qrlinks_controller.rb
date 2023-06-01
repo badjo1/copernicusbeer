@@ -47,6 +47,27 @@ class QrlinksController < ApplicationController
     end
   end
 
+  # POST /label/:label_id/qrlinks/batch
+  def batch
+    @label = Label.find(params[:label_id])
+    urls = params[:to_urls].split("\n")
+    Qrcode.all.order_by_reference.all.each_with_index do |qrcode,index|   
+      break if index >= urls.size
+      @label.qrlinks.build(qrcode_id: qrcode.id, url: urls[index])
+    end 
+
+    respond_to do |format|    
+      if @label.save
+          format.html { redirect_to @label, notice: "successfully inserted QR Links." }
+          format.json { render :show, status: :created, location: @label }
+      else # Foutbehandeling
+        format.html { redirect_to @label, notice: "oeps something when wrong." }
+        format.json { render json: @label.errors, status: :unprocessable_entity }
+      end 
+    end
+     
+  end
+
 
   # GET /qrlinks/new
   def new

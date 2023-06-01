@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :qrlinks, only: [:new, :create]
     get 'default_qrlinks', to: 'qrlinks#default', as: :default_qrlinks
     get 'reset_qrlinks', to: 'qrlinks#reset', as: :reset_qrlinks
+    post 'qrlinks/batch', to: "qrlinks#batch", as: :qrlinks_batch #good one
   end
   resources :qrlinks, only: [:edit, :update, :destroy]
   

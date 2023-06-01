@@ -8,7 +8,6 @@ class LabelsController < ApplicationController
 
   # GET /labels/1 or /labels/1.json
   def show
-    # @qrlinks = Qrlink.latest_qrlinks.with_qrcode.where(label_id: params[:id])
     @qrlinks = @label.qrlinks.latest_qrlinks.with_qrcode
   end
 

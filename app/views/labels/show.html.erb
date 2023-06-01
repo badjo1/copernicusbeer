@@ -44,6 +44,18 @@
     <% end %>
       
   </section>
+  
+  <section>
+    <H2>Batch QR Links</H2>
+
+      <%= form_tag label_qrlinks_batch_path(@label), method: :post do %>
+      <div>
+        <%= text_area_tag(:to_urls, params[:to_urls], rows: 10, cols: 25) %>
+      </div>  
+        <%= submit_tag("Create", name: nil) %>
+      
+      <% end %>
+  </section>
 
 
   <section>
