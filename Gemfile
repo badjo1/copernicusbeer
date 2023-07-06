@@ -45,9 +45,6 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 gem "sassc-rails"
 
-
-gem 'bootstrap'
-
 # https://github.com/perfectline/validates_url
 gem "validate_url"
 
