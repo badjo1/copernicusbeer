@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <header>
   <h1><%= @qrtag.qrcode.code %> of label <%= @label.code %> of batch <%= @label.batch.serialnumber %></h1>
   <p>redirect: <%= link_to @qrtag.qrcode.baseurl, @qrtag.qrcode.baseurl %> </p>

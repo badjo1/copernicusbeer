@@ -1,14 +1,13 @@
-<%= form_with(model: qrlink) do |form| %>
+<%= form_with(model: qrlink, builder: TailwindFormBuilder, class: "mt-6") do |form| %>
   <%= render 'shared/error_messages', object: form.object %>
-
-
+  
   <div>
-    <%= form.label :url, style: "display: block" %>
-    <%= form.text_field :url %>
+    <%= form.label :url %>
+    <%= form.text_field :url%>
   </div>
 
   <div>
-
+    <%= form.label :qrcode, style: "display: block" %>
     <%= form.select(:qrcode_id, Qrcode.all.order_by_reference.collect{ |m| [m.code, m.id] }, :prompt => 'Select') %>
   </div>
 

@@ -1,14 +1,12 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :header do %>
+    <h1>Batch <%= @batch.serialnumber %></h1>
+    <h3><%= @batch.description %></h3>
+    <p>
+      <%= link_to "Edit this batch", edit_batch_path(@batch) %> |
+      <%= button_to "Destroy this batch", @batch, method: :delete %>
+  </p>
+<% end %>
 
-<header>
-  <h1>Batch <%= @batch.serialnumber %></h1>
-  <p><%= @batch.description %></p>
-  <%= link_to "Edit this batch", edit_batch_path(@batch) %> |
-  <%= button_to "Destroy this batch", @batch, method: :delete %>
-</header>
-
-<main>
-<%= render "batches/labels", batch: @batch %>
-
-<%= link_to "Back to batches", batches_path %>
-<main>
+<section>
+  <%= render "batches/labels", batch: @batch %>
+<section>

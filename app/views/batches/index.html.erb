@@ -1,10 +1,18 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :header do %>
+    <h1>Batches</h1>
+    <h3>Yummie all that Coperniucsbeer</h3>
+    <p><%= link_to "New batch", new_batch_path %></p>
+<% end %>
 
-<header>
-  <h1>Batches</h1>
-  <p>Yummie all that Coperniucsbeer</p>
-  <%= link_to "New batch", new_batch_path %>
-</header>
+  <!-- button 
+    <a
+      class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+      data-te-ripple-init
+      data-te-ripple-color="light"
+      href="#!"
+      role="button"
+      >Get started</a
+    >-->
 
 
 <main id="batches">

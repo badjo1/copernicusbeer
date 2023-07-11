@@ -11,5 +11,9 @@ class Label < ApplicationRecord
 		self.qrtags.with_qrcode.find_by(code: code)
 	end
 
+	def name
+		"Label #{code}"
+	end
+
 end
 

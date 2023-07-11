@@ -1,5 +1,6 @@
 class BatchesController < ApplicationController
   before_action :set_batch, only: %i[ show edit update destroy ]
+  before_action :set_breadcrumbs, only: %i[ show  edit]
 
   # GET /batches or /batches.json
   def index
@@ -8,6 +9,7 @@ class BatchesController < ApplicationController
 
   # GET /batches/1 or /batches/1.json
   def show
+    add_breadcrumb("Batch #{@batch.serialnumber}")
   end
 
   # GET /batches/new
@@ -17,6 +19,7 @@ class BatchesController < ApplicationController
 
   # GET /batches/1/edit
   def edit
+    add_breadcrumb("Batch #{@batch.serialnumber}", @batch)
   end
 
   # POST /batches or /batches.json
@@ -63,8 +66,15 @@ class BatchesController < ApplicationController
       @batch = Batch.find(params[:id])
     end
 
+    def set_breadcrumbs
+      # add_breadcrumb("Admin", admin_home_path) if Current.user.admin?
+      add_breadcrumb("Batches", batches_path)
+    end
+
     # Only allow a list of trusted parameters through.
     def batch_params
       params.require(:batch).permit(:serialnumber, :description, :liters)
     end
+
+
 end

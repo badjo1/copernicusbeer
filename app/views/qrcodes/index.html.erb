@@ -1,38 +1,25 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :header do %>
+    <h1>Qrcodes</h1>
+    <h6>The <%= @qrcodes.load.count %> famous QR codes on the label of Coperniucs Beer</h6>
+    <%= link_to "New qrcode", new_qrcode_path %>
+<% end %>
 
-<header>
-  <h1>Qrcodes</h1>
-  <p>The 24 famous QR codes on the label of Coperniucsbeer</p>
 
-  <%= link_to "New qrcode", new_qrcode_path %>
-
-</header>
-
-<main id="qrcodes">
-
-  <table>
-    <thead>
-      <tr>
-        <th>Code</th>
-        <th>Url</th>
-        <th>#</th>
-        <th></th>
-        <th></th>  
-      </tr>
-    </thead>
-    <tbody>
+<section id="qrcodes" class="mb-6">
+  <H2>QR's</H2>
+  <div class="grid grid-cols-3 grid-rows-8 gap-2 sm:grid-cols-4 sm:grid-rows-6 md:grid-cols-6 md:grid-rows-4 md:grid-rows-4 sm:grid-flow-col md:gap-4">
     <% @qrcodes.each do |qrcode| %>
-      <tr>
-        <td><%= link_to qrcode.code, qrcode %></td>
-        <td><%= qrcode.baseurl %></td>
-        <td><%= qrcode.referencenumber %> (<%= qrcode.to_char_code %>) </td>
-        <td><%= button_to "Edit", edit_qrcode_path(qrcode), method: :get %></td>
-        <td> <%= button_to "Destroy", qrcode, method: :delete %></td>
-      </tr>
+      <%= link_to qrcode, class: "block max-w-sm p-6 bg-white border border-gray-800 shadow text-gray-900 hover:bg-gray-700  hover:text-white text-center" do %>
+          <h4 class="mb-2 tracking-tight">
+            <%= qrcode.code %>   
+          </h4>
+          <p class="font-normal text-gray-700">
+            <%= button_to "Edit", edit_qrcode_path(qrcode) %>
+             <%= button_to "Destroy", qrcode, method: :delete %>
+          </p>
+       <% end %>
     <% end %>
-    </tbody>
-  </table>
-
-</main>
+  </div>
+<section>
 
   

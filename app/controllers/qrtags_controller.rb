@@ -13,9 +13,10 @@ class QrtagsController < ApplicationController
       @qrtags = @label.qrtags.with_qrcode.where(labelnumber: @qrtag.labelnumber)
     end
 
-    respond_to do |format|
-      format.html
-    end 
+    add_breadcrumb("Home", root_path)
+    add_breadcrumb(@label.batch.name, @label.batch)
+    add_breadcrumb("search")
+  
   end
 
   def claim

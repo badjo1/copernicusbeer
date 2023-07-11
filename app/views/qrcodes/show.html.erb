@@ -1,6 +1,8 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :header do %>
+    <h1><%= @qrcode.code %></h1>
+    <h6>Nr. <%= @qrcode.referencenumber %> of the label of Coperniucs Beer</h6>
+    <%= button_to "Edit", edit_qrcode_path(@qrcode) %>
+    <%= button_to "Destroy", @qrcode, method: :delete %>
+<% end %>
 
-<header>
-  <h1><%= @qrcode.code %></h1>
-  <p>This site is powered by the holder of <%= link_to @qrcode.code, @qrcode.baseurl %></p>
-</header>
+      

@@ -1,16 +1,13 @@
-<p style="color: green"><%= notice %></p>
-
-<header>
-  <h1>Label <%= @label.code %> of batch <%= @label.batch.serialnumber %></h1>
-  <p><%= @label.description %></p>
-  <%= link_to "Edit this label", edit_label_path(@label) %> |
-  <%= button_to "Destroy this label", @label, method: :delete %>
-</header>
-
-
+<% content_for :header do %>
+    <h1> <%= @label.name %> of <%= @label.batch.name %></h1>
+    <h3><%= @label.description %>(<%= @label.qrtags.load.count / Qrcode.all.count %> Labels)</h3>
+    <%= link_to "Edit this label", edit_label_path(@label) %> |
+    <%= button_to "Destroy this label", @label, method: :delete %>
+<% end %>
+  
 <main>
   <section>
-  <H2><%= @label.qrtags.load.count %> Tags</H2>
+  <H2></H2>
   <p><%= link_to "search", label_search_path(@label) %> </p>
   <p><%= link_to "download (CSV)", label_qrtags_path(@label, format: :csv) %> </p>
 </section>
@@ -36,7 +33,7 @@
 
       <%= form_tag label_claim_path(@label), method: :get do %>
       <div>
-        <%= text_field_tag(:tag, params[:tag]) %>
+        <%= text_field_tag(:tag, params[:tag], class: "form-input") %>
         <%= submit_tag("claim", name: nil) %>
       </div>
     <% end %>
@@ -47,20 +44,23 @@
   
   <section>
     <H2>Batch QR Links</H2>
-
+    <div class="flex flex-col space-y-4 sm:flex-row sm:justify-left sm:space-y-0 sm:space-x-4">
       <%= form_tag label_qrlinks_batch_path(@label), method: :post do %>
       <div>
-        <%= text_area_tag(:to_urls, params[:to_urls], rows: 10, cols: 25) %>
+        <%= text_area_tag(:to_urls, params[:to_urls], rows: 10, cols: 25, class: "mt-1 block w-full") %>
+
       </div>  
-        <%= submit_tag("Create", name: nil) %>
-      
+        <%= submit_tag("Create", name: nil, class: "mt-1 block w-full py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900") %>
       <% end %>
+    </div>
   </section>
 
 
   <section>
     <%= link_to "Back to batch #{@label.batch.serialnumber}", @label.batch %>
  </section>
+
+          
 <main>
 
 

@@ -1,0 +1,18 @@
+<nav class="container mx-auto py-4 flex justify-between">
+	<a href="/" class="flex space-x-2 items-centerjj ml-4">
+
+		<%=  image_tag("copernicusbeer-logo-2x.png", size: "40x40", alt: "Copernicus Logo", class: "", loading: "lazy")  %>
+		<p class="font-mono font-medium text-sm uppercase">Copernicus<br>Beer</p>
+	</a>
+	<ul class="list-none flex items-center mr-4">
+		<li><%= link_to "Login", "#" %></li>
+	</ul>
+</nav>
+<% if content_for?(:header) %>
+	<div class="bg-gray-100 <%= yield :header_class %>">
+ 		<div class="container mx-auto  max-w-screen-xl text-center py-16 px-8 md:px-16 lg:px-32 font-mono">
+ 			
+			<%= yield :header %>
+ 		</div>
+ 	</div>
+<% end %>

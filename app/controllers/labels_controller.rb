@@ -1,5 +1,6 @@
 class LabelsController < ApplicationController
   before_action :set_label, only: %i[ show edit update destroy ]
+  before_action :set_breadcrumbs, only: %i[ show  edit]
 
   # GET /labels or /labels.json
   def index
@@ -9,6 +10,9 @@ class LabelsController < ApplicationController
   # GET /labels/1 or /labels/1.json
   def show
     @qrlinks = @label.qrlinks.latest_qrlinks.with_qrcode
+
+    add_breadcrumb(@label.batch.name, @label.batch)
+    add_breadcrumb(@label.name)
   end
 
   # GET /labels/new
@@ -82,6 +86,10 @@ class LabelsController < ApplicationController
           new_tag.save!
         end  
       }   
+    end
+
+    def set_breadcrumbs
+      add_breadcrumb("Batches", batches_path)
     end
 
 end

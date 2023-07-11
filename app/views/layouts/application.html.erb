@@ -5,12 +5,25 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
-    <%#=  stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <!--<_link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">//-->
+    <%=  stylesheet_link_tag "tailwind", "inter-font","data-turbo-track": "reload" %>
+    <%=  stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <header class="w-full border-b border-b-gray-200 mb-6">
+      <%= render 'layouts/header' %>
+    </header>
+    <main class="container px-4 mx-auto font-mono">
+      <%= render "shared/breadcrumbs" %>
+      <%= render "shared/flash" %> 
+      <%= yield %>
+    </main>
+    <footer class="w-full border-t border-t-gray-200">
+      <%= render 'layouts/footer' %>
+    </footer>
   </body>
 </html>
+
+
