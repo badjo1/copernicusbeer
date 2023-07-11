@@ -22,8 +22,13 @@ class Qrtag < ApplicationRecord
   		qrlink ? qrlink.url : qrcode.baseurl
   	end
 
+
+	def referencenumber
+  		qrcode.referencenumber
+  	end
+
 	def self.to_csv
-	attributes = %w{tagurl}
+	attributes = %w{tagurl labelnumber referencenumber}
 	generate_csv(attributes)
 	end
 
