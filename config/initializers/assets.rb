@@ -11,4 +11,3 @@ Rails.application.config.assets.version = "1.0"
 # folder are already added.
 
 # Rails.application.config.assets.precompile += %w( application.scss )
-Rails.application.config.assets.precompile += %w( application.scss bootstrap.min.js popper.js )
