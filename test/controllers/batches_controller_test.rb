@@ -3,6 +3,7 @@ require "test_helper"
 class BatchesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @batch = batches(:one)
+    log_in_as(users(:one))
   end
 
   test "should get index" do

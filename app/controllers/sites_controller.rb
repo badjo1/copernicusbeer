@@ -1,5 +1,25 @@
 class SitesController < ApplicationController
 
+	#  GET '/:qr/:label/:tag'
+	def redirect
+		reference = Qrcode.to_reference(params[:qr][1]) 
+		qrcode = Qrcode.find_by referencenumber: reference
+		return redirect_to root_url, notice: "unknow qrcode" unless qrcode       
+
+		@label = Label.find_by code: params[:label]
+		return redirect_to qrcode, notice: "unknow label" unless @label       
+
+		@qrtag =  @label.qrtags.find_by code: params[:tag]
+		return redirect_to qrcode, notice: "unknow tag" unless @qrtag              
+
+		if !(@qrtag.qrlink)
+		  @label.claim_label(@qrtag.labelnumber)
+		  @qrtag.reload
+		end
+
+		redirect_to @qrtag.to_url, allow_other_host: true 
+	end
+
 	def claimed
 		@claimed  = Qrtag.where.not(claimed_on: nil).order(claimed_on: :desc)
 	end

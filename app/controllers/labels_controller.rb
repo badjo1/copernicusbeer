@@ -1,4 +1,4 @@
-class LabelsController < ApplicationController
+class LabelsController < ProtectedController
   before_action :set_label, only: %i[ show edit update destroy ]
   before_action :set_breadcrumbs, only: %i[ show  edit]
 

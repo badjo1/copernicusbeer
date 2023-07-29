@@ -1,4 +1,4 @@
-class QrlinksController < ApplicationController
+class QrlinksController < ProtectedController
   before_action :set_qrlink, only: %i[ show edit update destroy ]
 
   # GET /qrlinks or /qrlinks.json

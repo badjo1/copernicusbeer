@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "login", to: "user_sessions#show"
+  get "get_nonce/:id", to: "user_sessions#new"
+  post "login", to: "user_sessions#create"
+  get "logout", to: "user_sessions#destroy"
   resources :qrlinks
   resources :qrcodes
   resources :batches do 
@@ -14,8 +18,9 @@ Rails.application.routes.draw do
     post 'qrlinks/batch', to: "qrlinks#batch", as: :qrlinks_batch #good one
   end
   resources :qrlinks, only: [:edit, :update, :destroy]
+  resources :users, only: [:show] 
   
-  get '/:qr/:label/:tag', to: 'qrtags#redirect', constraints: { qr: /[q][0-9a-z]/ }, as: 'redirect'
+  get '/:qr/:label/:tag', to: 'sites#redirect', constraints: { qr: /[q][0-9a-z]/ }, as: 'redirect'
 
   # get '/:qr/:id)', to: 'qrtags#show', constraints: { qr: /[q]\d{2}/ }
 

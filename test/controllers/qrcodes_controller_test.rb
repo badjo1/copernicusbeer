@@ -3,6 +3,7 @@ require "test_helper"
 class QrcodesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @qrcode = qrcodes(:one)
+    log_in_as(users(:one))
   end
 
   test "should get index" do

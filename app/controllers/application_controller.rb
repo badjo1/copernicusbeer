@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
-
+  include UserSessionsHelper
+  before_action :set_locale
+ 
 	protected
 
     Breadcrumb = Struct.new(:name, :path)
@@ -11,4 +13,11 @@ class ApplicationController < ActionController::Base
     def breadcrumbs
       @breadcrumbs ||= []
     end
+
+    def set_locale
+      I18n.locale = params[:locale] || I18n.default_locale
+    end
 end
+
+
+  

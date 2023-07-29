@@ -4,6 +4,7 @@ class LabelsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @label = labels(:one)
     @batch = @label.batch
+    log_in_as(users(:one))
   end
 
   test "should get index" do

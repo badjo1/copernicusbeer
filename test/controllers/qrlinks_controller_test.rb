@@ -4,6 +4,8 @@ class QrlinksControllerTest < ActionDispatch::IntegrationTest
   setup do
     @qrlink = qrlinks(:one)
     @label  = @qrlink.label
+    log_in_as(users(:one))
+
   end
 
   test "should get index" do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_24_193022) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_18_132637) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,6 +66,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_24_193022) do
     t.index ["label_id"], name: "index_qrtags_on_label_id"
     t.index ["qrcode_id"], name: "index_qrtags_on_qrcode_id"
     t.index ["qrlink_id"], name: "index_qrtags_on_qrlink_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "eth_address"
+    t.string "nonce_digest"
+    t.datetime "nonce_at"
+    t.string "remember_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "labels", "batches"

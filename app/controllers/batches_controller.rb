@@ -1,4 +1,4 @@
-class BatchesController < ApplicationController
+class BatchesController < ProtectedController
   before_action :set_batch, only: %i[ show edit update destroy ]
   before_action :set_breadcrumbs, only: %i[ show  edit]
 

@@ -1,4 +1,4 @@
-class QrcodesController < ApplicationController
+class QrcodesController < ProtectedController
   before_action :set_qrcode, only: %i[ edit update destroy ]
 
   # GET /qrcodes or /qrcodes.json

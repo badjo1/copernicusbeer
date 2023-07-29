@@ -15,5 +15,16 @@ class Label < ApplicationRecord
 		"Label #{code}"
 	end
 
+	def claim_label (labelnumber)
+      tags_on_label = self.qrtags.where(labelnumber: labelnumber)
+      latest_links =  self.qrlinks.latest_qrlinks  
+      tags_on_label.each do |tag|   
+        link=latest_links.find_by(qrcode_id: tag.qrcode_id)
+        tag.update(qrlink_id: link.id) if link
+        # ERROR: duplicate key value violates unique constraint "qrtags_pkey
+        # tag.update(claimed_on: Time.current) if tag.id = @qrtag.id
+      end
+    end
+
 end
 

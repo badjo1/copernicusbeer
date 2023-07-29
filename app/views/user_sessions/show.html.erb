@@ -1,0 +1,20 @@
+<% content_for :header do %>
+    <h1>Connect your wallet</h1>
+<% end %>
+
+<%= form_for(:user_session, url: login_path, data:{controller: "user-session"}) do |f| %>
+    <%= f.text_field :eth_address, data:{"user-session-target":"eth_address"} %>
+    <%= f.text_field :eth_signature, data:{"user-session-target":"eth_signature"} %>
+    <%= f.text_field :eth_message, data:{"user-session-target":"eth_message"} %>
+    <div class="form-outline mb-4">
+        <%= f.label :remember_me, class: "checkbox inline" do %>
+          <%= f.check_box :remember_me %>
+          <span>Remember me on this computer</span>
+        <% end %>
+    </div>
+    <div class="pt-1 mb-4">   
+      <%= f.submit "Connect", class: "btn btn-dark btn-lg btn-block", data: {action:"click->user-session#login"} %>
+    </div>
+    <span data-user-session-target="error_message">
+    </span>
+<% end %>

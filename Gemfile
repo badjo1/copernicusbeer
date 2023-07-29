@@ -34,7 +34,7 @@ gem "jbuilder"
 # gem "kredis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem "bcrypt"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
@@ -47,6 +47,9 @@ gem "bootsnap", require: false
 
 # https://github.com/perfectline/validates_url
 gem "validate_url"
+
+# Use Ruby-Eth for signature recovery on https://github.com/q9f/eth.rb/
+gem "eth"
 
 # analytics: Track visits and events https://github.com/ankane/ahoy
 #gem "ahoy_matey"
@@ -75,6 +78,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "rails-controller-testing"
 end
 
 gem "tailwindcss-rails", "~> 2.0"
