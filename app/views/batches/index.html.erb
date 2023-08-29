@@ -4,35 +4,21 @@
     <p><%= link_to "New batch", new_batch_path %></p>
 <% end %>
 
-  <!-- button 
-    <a
-      class="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
-      data-te-ripple-init
-      data-te-ripple-color="light"
-      href="#!"
-      role="button"
-      >Get started</a
-    >-->
-
-
-<main id="batches">
-  <table>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Description</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
+<div class="table border-collapse table-auto w-full text-sm">
+  <div class="table-header-group">
+    <div class="table-row border-b dark:border-slate-600">
+      <h6 class="table-cell text-left p-4 pl-8 pt-0 pb-3 ">#</h6>
+      <h6 class="table-cell text-left p-4 pl-8 pt-0 pb-3 ">Description</h6>
+      <h6 class="table-cell text-right p-4 pl-8 pt-0 pb-3 ">Capacity</h6>
+    </div>
+  </div>
+  <div class="table-row-group">
     <% @batches.each do |batch| %>
-      <tr>
-        <td><%= link_to batch.serialnumber, batch %></td>
-        <td><%= batch.description %></td>
-        <td><%= "#{batch.liters} liters" %></td>  
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-</main>
-
+      <%= link_to batch, class: "table-row border-b ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-neutral-600" do %>
+        <div class="table-cell px-6 py-4"><%= batch.serialnumber %></div>
+        <div class="table-cell px-6 py-4"><%= batch.description %></div>
+        <div class="table-cell px-6 py-4 text-right whitespace-nowrap"><%= batch.liters %> liters</div>
+      <% end %>
+    <% end %>>
+  </div>
+</div>

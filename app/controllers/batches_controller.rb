@@ -4,7 +4,7 @@ class BatchesController < ProtectedController
 
   # GET /batches or /batches.json
   def index
-    @batches = Batch.all
+    @batches = Batch.all.order(serialnumber: :desc)
   end
 
   # GET /batches/1 or /batches/1.json
@@ -14,7 +14,7 @@ class BatchesController < ProtectedController
 
   # GET /batches/new
   def new
-    @batch = Batch.new
+    @batch = authorize Batch.new
   end
 
   # GET /batches/1/edit
@@ -24,7 +24,7 @@ class BatchesController < ProtectedController
 
   # POST /batches or /batches.json
   def create
-    @batch = Batch.new(batch_params)
+    @batch = authorize Batch.new(batch_params)
 
     respond_to do |format|
       if @batch.save
@@ -74,6 +74,11 @@ class BatchesController < ProtectedController
     # Only allow a list of trusted parameters through.
     def batch_params
       params.require(:batch).permit(:serialnumber, :description, :liters)
+    end
+
+    def authorize batch
+      raise NotAuthorizedError unless current_user.admin?
+      return batch
     end
 
 
