@@ -4,7 +4,7 @@ one:
   qrcode: one
   label: one
   qrlink: one
-  code: MyString
+  code: <%= Qrtag.eleven_token %>
   claimed_on: <%= DateTime.now %>
   labelnumber: 1
 
@@ -12,7 +12,9 @@ two:
   qrcode: two
   label: two
   qrlink: two
-  code: MyString
+  code: <%= Qrtag.eleven_token %>
   claimed_on: <%= DateTime.now %>
   code: MyString
   labelnumber: 1
+
+  

@@ -53,5 +53,10 @@ class SitesControllerTest < ActionDispatch::IntegrationTest
   end
 
 
+  test "hofprint hack" do
+    tag = @qrtag.code + '1'
+    get redirect_url qr: 'q1', label: @qrtag.label.code, tag: tag
+    assert_redirected_to @qrtag.qrlink.url
+  end
 
 end
