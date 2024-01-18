@@ -8,11 +8,15 @@ class Qrtag < ApplicationRecord
 	
 	def generate_token
 	    self.code = loop do
-	      # contain A-Z, a-z, 0-9, “-” and “_”. “=”	
-	      random_token = SecureRandom.urlsafe_base64(11, true).first(11)
+	      random_token = Qrtag.eleven_token
 	      break random_token unless Qrtag.exists?(label_id: self.label_id, code: random_token)
 	    end
   	end
+
+	# Returns a random token, contain A-Z, a-z, 0-9, “-” and “_”. “=”	
+	def Qrtag.eleven_token
+		SecureRandom.urlsafe_base64(11, true).first(11)
+	end
 
   	def tagurl
   		return "http://cpbr.xyz/q#{qrcode.to_char_code}/#{label.code}/#{code}"

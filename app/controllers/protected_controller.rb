@@ -13,8 +13,7 @@ class ProtectedController < ApplicationController
   protected
 
     def not_authorized(exception)
-      flash[:warning] = t "#{exception.exception_type}.#{exception.message}", scope: "pundit", default: :defaultt
-      redirect_to(request.referrer || root_path)
+      redirect_to root_path, alert: "Not autorized"
     end
   
     def not_authenticated
