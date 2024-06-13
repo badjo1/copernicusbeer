@@ -1,0 +1,16 @@
+<section class="bg-gray-100 flex items-center justify-center border border-gray-800">
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-4 py-4">
+        <!-- Generate qr blocks -->
+        <% qrlinks.each do |qrlink| %>
+        <div class="relative flex items-center justify-center w-32 h-32 sm:w-32 sm:h-32 md:w-32 md:h-32 lg:w-32 lg:h-32 bg-blue-500 group">
+            <div class="absolute text-center text-white text-lg font-bold"><%= qrlink.qrcode.code %></div>
+            <iframe src="<%= qrlink.url %>" class="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></iframe>
+          <%= button_to qrlink, method: :delete, class: "absolute top-1 right-1 text-right text-white text-lg font-bold" do %>
+            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M3 6h18v2H3V6zm2 3h14l-1 14H6L5 9zm6-7h2v2h-2V2zm1 5c-.552 0-1 .448-1 1v12c0 .552.448 1 1 1s1-.448 1-1V8c0-.552-.448-1-1-1zm-4 1c-.552 0-1 .448-1 1v12c0 .552.448 1 1 1s1-.448 1-1V8c0-.552-.448-1-1-1zm8 0c-.552 0-1 .448-1 1v12c0 .552.448 1 1 1s1-.448 1-1V8c0-.552-.448-1-1-1z"/>
+            </svg>
+          <% end %>
+
+        </div>
+        <% end %>
+</section>

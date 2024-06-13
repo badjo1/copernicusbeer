@@ -7,29 +7,26 @@
   
 <main>
   <section>
-  <H2></H2>
-  <p><%= link_to "search", label_search_path(@label) %> </p>
-  <p><%= link_to "download (CSV)", label_qrtags_path(@label, format: :csv) %> </p>
-</section>
+    <H2></H2>
+    <p><%= link_to "search", label_search_path(@label) %> </p>
+    <p><%= link_to "download (CSV)", label_qrtags_path(@label, format: :csv) %> </p>
+  </section>
+
+
 
   <section>
-    <H2>Links</H2>
+    
     <% if @qrlinks.empty? %>
       <%= link_to "Default links", label_default_qrlinks_path(@label) %>
     <% else %>
-      <%= link_to "Reset links", label_reset_qrlinks_path(@label) %>
-      <ul id="links">
-        <% @qrlinks.each do |qrlink| %>
-            <li>
-              <%= link_to "#{qrlink.qrcode.code}: ", qrlink %>
-              <%= qrlink.url %>
-              <%= qrlink.created_at %>
-              <%= button_to "Destroy this qrlink", qrlink, method: :delete %>
+      <H2>
+        Label
+      </H2>
+      <%= link_to "Insert links", new_label_qrlink_path(@label) %>
 
-            </li>
-        <% end %>
-      </ul>
-      <%= link_to "New links", new_label_qrlink_path(@label) %>
+      <%= render "labels/qrcodes", qrlinks: @qrlinks %>
+      <%= link_to "Reset links", label_reset_qrlinks_path(@label) %>
+      
 
       <%= form_tag label_claim_path(@label), method: :get do %>
       <div>
