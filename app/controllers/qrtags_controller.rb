@@ -32,7 +32,7 @@ class QrtagsController < ProtectedController
 
   # GET /labels/:id/qrtags 
   def index
-    custom_order = [4, 3, 2, 1, 8, 7, 6, 5, 4, 12, 11, 10, 9, 16, 15, 14, 9, 8, 20, 19, 18, 17, 16, 24, 23, 22, 21]
+    custom_order = [4, 3, 2, 1, 8, 7, 6, 5, 4, 12, 11, 10, 9, 16, 15, 14, 13, 9, 8, 20, 19, 18, 17, 16, 24, 23, 22, 21]
     order_case = custom_order.each_with_index.map { |num, index| "WHEN #{num} THEN #{index}" }.join(' ')
 
     @label = Label.find params[:label_id]
