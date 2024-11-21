@@ -76,9 +76,11 @@ class QrtagsController < ProtectedController
     end
 
     # CSV te genereren
-    def generate_csv(grouped_qrtags)
-      CSV.generate(headers: false) do |csv|
-        # csv << ["Label Number", "QR Codes"] # CSV-kopteksten
+    def generate_csv(grouped_qrtags, separator = ";")
+      CSV.generate(headers: true, col_sep: separator) do |csv|
+        all_referencenumbers = grouped_qrtags.values.flatten.map(&:referencenumber).uniq.sort
+        # Voeg de headers toe
+        csv << all_referencenumbers.map { |i| "tagurl#{i}" }
         grouped_qrtags.each do |labelnumber, tags|
           csv << tags.map { |tag| tag.tagurl }
         end
