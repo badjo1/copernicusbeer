@@ -11,7 +11,7 @@
 <% if @qrtags %>
   <div id="result">
     <% @qrtags.each do |qrtag| %>
-        <%= qrtag.qrcode.code %>: <%= qrtag.code %> (<%= qrtag.to_url %>)
+        <%= qrtag.qrcode.code %>: <%= link_to qrtag.code, edit_qrtag_path(qrtag) %> (<%= qrtag.to_url %>)
         <% if qrtag.id == @qrtag.id %>
           selected
         <% end %>

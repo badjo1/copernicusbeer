@@ -10,6 +10,7 @@
     <H2></H2>
     <p><%= link_to "search", label_search_path(@label) %> </p>
     <p><%= link_to "download (CSV)", label_qrtags_path(@label, format: :csv) %> </p>
+    <p><%= link_to "Create new link for all bottles", new_label_qrlink_path(@label) %>
   </section>
 
 
@@ -22,7 +23,6 @@
       <H2>
         Label
       </H2>
-      <%= link_to "Insert links", new_label_qrlink_path(@label) %>
 
       <%= render "labels/qrcodes", qrlinks: @qrlinks %>
       <%= link_to "Reset links", label_reset_qrlinks_path(@label) %>

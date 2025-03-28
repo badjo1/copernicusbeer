@@ -1,0 +1,12 @@
+<%= form_with(model: @qrtag, builder: TailwindFormBuilder, class: "mt-6") do |form| %>
+  <%= render 'shared/error_messages', object: form.object %>
+  
+  <div>
+    <%= form.label :url %>
+    <%= form.text_field :url%>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

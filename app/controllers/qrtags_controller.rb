@@ -1,5 +1,7 @@
 class QrtagsController < ProtectedController
 
+  
+
   # GET /labels/:label_id/search(/:q)
   def search
     @label = Label.find params[:label_id]
@@ -34,6 +36,16 @@ class QrtagsController < ProtectedController
     @label = Label.find params[:label_id]
     @label.qrtags.where.not(qrlink_id: nil).update_all(qrlink_id: nil)
     redirect_to @label, notice: "All tags are claimable."
+  end
+
+def edit
+    @qrtag = Qrtag.find(params[:id])
+  end
+
+  def update
+    @qrtag = Qrtag.find(params[:id])
+
+    redirect_to label_search_path(@qrtag.label_id, q: @qrtag.code), notice: "Updated url of tag '#{@qrtag.code}'"
   end
 
   # GET /labels/:id/qrtags 
@@ -72,6 +84,8 @@ class QrtagsController < ProtectedController
       format.html # Renders a view (optional, for browser access)
       format.csv { send_data generate_csv(@grouped_qrtags), filename: csv_name }
     end
+
+
   end
 
 
