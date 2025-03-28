@@ -13,7 +13,7 @@ class Qrtag < ApplicationRecord
 	    end
   	end
 
-	# Returns a random token, contain A-Z, a-z, 0-9, “-” and “_”. “=”	
+	# Returns a random token, contain A-Z, a-z, 0-9, “-” and “_”	
 	def Qrtag.eleven_token
 		SecureRandom.urlsafe_base64(11, true).first(11)
 	end

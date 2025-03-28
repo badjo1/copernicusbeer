@@ -30,6 +30,12 @@ class QrtagsController < ProtectedController
     end
   end
 
+  def unclaim_all
+    @label = Label.find params[:label_id]
+    @label.qrtags.where.not(qrlink_id: nil).update_all(qrlink_id: nil)
+    redirect_to @label, notice: "All tags are claimable."
+  end
+
   # GET /labels/:id/qrtags 
   # def index
   #   custom_order = [4, 3, 2, 1, 8, 7, 6, 5, 4, 12, 11, 10, 9, 16, 15, 14, 13, 9, 8, 20, 19, 18, 17, 16, 24, 23, 22, 21]

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :qrtags, only: [:index]
     get 'search', to: 'qrtags#search', as: :search
     get 'claim',  to: 'qrtags#claim', as: :claim
+    get 'unclaim_tags', to: 'qrtags#unclaim_all', as: :unclaim_tags
     resources :qrlinks, only: [:new, :create]
     get 'default_qrlinks', to: 'qrlinks#default', as: :default_qrlinks
     get 'reset_qrlinks', to: 'qrlinks#reset', as: :reset_qrlinks
