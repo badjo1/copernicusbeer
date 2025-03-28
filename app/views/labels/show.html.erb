@@ -2,7 +2,7 @@
     <h1> <%= @label.name %> of <%= @label.batch.name %></h1>
     <h3><%= @label.description %>(<%= @label.qrtags.count / Qrcode.all.count %> Labels)</h3>
     <%= link_to "Edit this label", edit_label_path(@label) %> |
-    <%= button_to "Destroy this label", @label, method: :delete %>
+    <%= button_to "Destroy this label", @label, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
 <% end %>
   
 <main>

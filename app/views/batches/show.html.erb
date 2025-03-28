@@ -3,7 +3,7 @@
     <h3><%= @batch.description %></h3>
     <p>
       <%= link_to "Edit this batch", edit_batch_path(@batch) %> |
-      <%= button_to "Destroy this batch", @batch, method: :delete %>
+      <%= button_to "Destroy this batch", @batch, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
   </p>
 <% end %>
 
