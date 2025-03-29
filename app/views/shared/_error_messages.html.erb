@@ -1,12 +1,12 @@
 <% if object.errors.any? %>
-  <div style="color: red">
-    <h2><%= pluralize(object.errors.count, "error") %> prohibited this label from being saved:</h2>
-
-    <ul>
+  <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-lg shadow-md mb-4">
+    <h2 class="font-bold text-lg">
+      <%= pluralize(object.errors.count, "error") %> Oeps een fouttje bij het opslaan:
+    </h2>
+    <ul class="mt-2 list-disc list-inside">
       <% object.errors.each do |error| %>
         <li><%= error.full_message %></li>
       <% end %>
     </ul>
   </div>
 <% end %>
-

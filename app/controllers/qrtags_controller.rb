@@ -38,14 +38,24 @@ class QrtagsController < ProtectedController
     redirect_to @label, notice: "All tags are claimable."
   end
 
-def edit
-    @qrtag = Qrtag.find(params[:id])
+  def new_qrlink
+    @qrtag = Qrtag.find(params[:qrtag_id])
+    @qrlink = @qrtag.label.qrlinks.new
   end
 
-  def update
-    @qrtag = Qrtag.find(params[:id])
+  def create_qrlink
+    @qrtag = Qrtag.find(params[:qrtag_id])
+    @qrlink = Qrlink.new(qrcode_id: @qrtag.qrcode_id, label_id: @qrtag.label_id, url: qrlink_params[:url], valid_until: Time.zone.now)
 
-    redirect_to label_search_path(@qrtag.label_id, q: @qrtag.code), notice: "Updated url of tag '#{@qrtag.code}'"
+    begin
+      ActiveRecord::Base.transaction do
+        @qrlink.save!
+        @qrtag.update!(qrlink_id: @qrlink.id)
+      end
+      redirect_to label_search_path(@qrtag.label_id, q: @qrtag.code), notice: "Link aangemaakt voor tag '#{@qrtag.code}'"
+    rescue ActiveRecord::RecordInvalid => e
+      render :new_qrlink
+    end
   end
 
   # GET /labels/:id/qrtags 
@@ -93,6 +103,10 @@ def edit
 
     def qrtags_params
       params.require(:qrtag).permit(:q)
+    end
+
+    def qrlink_params
+      params.require(:qrlink).permit(:url)
     end
 
     # CSV te genereren

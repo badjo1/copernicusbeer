@@ -20,7 +20,10 @@ Rails.application.routes.draw do
   end
   resources :qrlinks, only: [:edit, :update, :destroy]
   resources :users, only: [:show] 
-  resources :qrtags, only: [:edit, :update]
+  resources :qrtags, only: [:show] do
+    get "qrlinks/new", to: "qrtags#new_qrlink", as: :new_qrlink
+    post "qrlinks", to: "qrtags#create_qrlink"
+  end
 
   get '/:qr/:label/:tag', to: 'sites#redirect', constraints: { qr: /[q][0-9a-z]/ }, as: 'redirect'
 

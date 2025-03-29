@@ -6,9 +6,18 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
     super(method, merged_opts)
   end
 
-   def label(method, text = nil, options = {})
-      default_style = "block text-gray-500 md:text-left mb-1 md:mb-0 pr-4"
-      super(method, text, options.merge({class: default_style}))
-    end
+  def label(method, text = nil, options = {})
+    default_style = "block text-gray-500 md:text-left mb-1 md:mb-0 pr-4"
+    super(method, text, options.merge({class: default_style}))
+  end
+
+  def submit(value = "Opslaan", options = {})
+    options[:class] = "bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 cursor-pointer"
+    super
+  end
+
+  def cancel_button(path)
+    @template.link_to "Annuleren", path, class: "bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300"
+  end
   
 end
