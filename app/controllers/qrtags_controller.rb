@@ -54,7 +54,7 @@ class QrtagsController < ProtectedController
       end
       redirect_to label_search_path(@qrtag.label_id, q: @qrtag.code), notice: "Link aangemaakt voor tag '#{@qrtag.code}'"
     rescue ActiveRecord::RecordInvalid => e
-      render :new_qrlink
+      render :new_qrlink, status: :unprocessable_entity
     end
   end
 

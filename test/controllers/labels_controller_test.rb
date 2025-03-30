@@ -7,10 +7,6 @@ class LabelsControllerTest < ActionDispatch::IntegrationTest
     log_in_as(users(:one))
   end
 
-  test "should get index" do
-    # no index
-  end
-
   test "should get new" do
     get new_batch_label_url @batch
     assert_response :success
