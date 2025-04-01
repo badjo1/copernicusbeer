@@ -2,3 +2,8 @@
     <h1>ProfiLe of</h1>
     <h6><%= @user.eth_address %></h6>
 <% end %>
+
+<div data-controller="web3">
+  <button data-action="click->web3#getBalance">Check Balance</button>
+  <p data-web3-target="balance">Balance komt hier...</p>
+</div>

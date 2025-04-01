@@ -1,32 +1,23 @@
-<%= form_with(model: batch) do |form| %>
-  <% if batch.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(batch.errors.count, "error") %> prohibited this batch from being saved:</h2>
-
-      <ul>
-        <% batch.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :serialnumber, style: "display: block" %>
-    <%= form.number_field :serialnumber %>
+<%= form_with(model: batch, builder: TailwindFormBuilder, class: "mt-6") do |form| %>
+  
+  <%= render 'shared/error_messages', object: form.object %>
+  
+  <div class="mb-4">  
+    <%= form.label :serialnumber %>
+    <%= form.text_field :serialnumber %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
+  <div class="mb-4">  
+    <%= form.label :description %>
     <%= form.text_field :description %>
   </div>
 
-  <div>
-    <%= form.label :liters, style: "display: block" %>
+  <div class="mb-4">  
+    <%= form.label :liters %>
     <%= form.number_field :liters %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="mb-4">  
+    <%= form.submit value="Create Batch"%>
   </div>
 <% end %>
