@@ -1,9 +1,44 @@
 <% content_for :header do %>
     <h1>ProfiLe of</h1>
-    <h6><%= @user.eth_address %></h6>
+    <h6><%= @user.masked_eth_address %></h6>
 <% end %>
 
-<div data-controller="web3">
-  <button data-action="click->web3#getBalance">Check Balance</button>
-  <p data-web3-target="balance">Balance komt hier...</p>
+<h6>Balance</h6>
+<div data-controller="eth" data-eth-address-value="<%= @user.eth_address %>">
+    <p data-eth-target="balance">Loading...</p>
+</div>
+
+<div data-controller="token" 
+    data-token-address-value="<%= @user.eth_address %>"
+    data-token-contract-value="0xd9Fcd98c322942075A5C3860693e9f4f03AAE07b">
+    <span data-token-target="name">Loading
+    </span>:
+    <span data-token-target="balance">balance...
+    </span>
+    <span data-token-target="symbol">
+    </span>
+</div>
+
+<div data-controller="token" 
+    data-token-address-value="<%= @user.eth_address %>"
+    data-token-contract-value="0x940a2dB1B7008B6C776d4faaCa729d6d4A4AA551">
+    <span data-token-target="name">Loading
+    </span>:
+    <span data-token-target="balance">balance...
+    </span>
+    <span data-token-target="symbol">
+    </span>
+</div>
+
+<div data-controller="token" 
+    data-token-address-value="<%= @user.eth_address %>"
+    data-token-contract-value="0xA85B4D2F5D271efB2d1776744c2bc2d09033Ca93"
+    data-token-chain-value="polygon"
+    >
+    <span data-token-target="name">Loading
+    </span>:
+    <span data-token-target="balance">balance...
+    </span>
+    <span data-token-target="symbol">
+    </span>
 </div>

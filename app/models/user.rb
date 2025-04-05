@@ -55,4 +55,10 @@ class User < ApplicationRecord
     nonce_at < 5.minutes.ago
   end
 
+  def masked_eth_address  
+    first_seven = self.eth_address[0, 7] # include '0x' over voor selectie
+    last_five = self.eth_address[-5, 5]
+    "#{first_seven}...#{last_five}"
+  end
+
 end
