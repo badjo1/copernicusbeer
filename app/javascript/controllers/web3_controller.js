@@ -3,8 +3,8 @@ import { Controller } from "@hotwired/stimulus"
 import { createPublicClient, http } from "viem"
 import { mainnet, polygon, base } from "viem/chains"
 
-export default class ParentController extends Controller {
-  static targets = ["eth"]
+export default class Web3Controller extends Controller {
+
   static values = {
       address : String,
       chain   : String
@@ -16,17 +16,6 @@ export default class ParentController extends Controller {
       console.warn("Geen geldig Ethereum-adres gevonden!")
       return
     }
-    if (this.hasEthTarget) {
-      this.getEth() 
-    }
-  }
-
-  async getEth() {
-    console.log('get Eth Balance')
-    const address = this.addressValue
-    const balance = await this.getClient().getBalance({ address })
-    const balanceInEth = (Number(balance) / (10 ** 18))
-    this.balanceTarget.textContent = `Ethereum ${balanceInEth} ETH`
   }
 
   getClient() {

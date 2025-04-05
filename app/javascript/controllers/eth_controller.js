@@ -1,6 +1,6 @@
-import Web3Controller from "./web3_controller.js"
+import Web3Controller from "controllers/web3_controller"
 
-export default class extends Web3Controller {
+export default class EthControler extends Web3Controller {
   static targets = ["balance"]
 
   connect() {
