@@ -1,4 +1,4 @@
-import Web3Controller from "./web3_controller"
+import Web3Controller from "./web3_controller.js"
 
 export default class extends Web3Controller {
   static targets = ["balance"]

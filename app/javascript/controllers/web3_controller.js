@@ -3,7 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 import { createPublicClient, http } from "viem"
 import { mainnet, polygon, base } from "viem/chains"
 
-export default class extends Controller {
+export default class ParentController extends Controller {
   static targets = ["eth"]
   static values = {
       address : String,
