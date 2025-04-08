@@ -2,7 +2,7 @@ import Web3Controller from "controllers/web3_controller"
 import { erc20Abi, formatUnits } from "viem"
 
 export default class TokenController extends Web3Controller {
-static targets = ["balance", "symbol", "name"]
+  static targets = ["balance", "symbol", "name"]
   static values = {
     contract: String,
   }
